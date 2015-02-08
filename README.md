@@ -1,2 +1,2 @@
 # HoneyPotProject
-A basic honey pot project.  Built on the Modern Honey Network architecture
+A basic honey pot project.  Built on the [http://threatstream.github.io/mhn/](Modern Honey Network architecture)
