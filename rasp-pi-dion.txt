@@ -1,0 +1,48 @@
+#http://droidtoo.blogspot.com/2013/05/setting-up-dionaea-on-raspberry-pi.html
+
+echo "deb http://packages.s7t.de/raspbian wheezy main" >> /etc/apt/sources.list
+apt-get update
+apt-get install libglib2.0-dev 
+apt-get install libssl-dev 
+apt-get install libcurl4-openssl-dev 
+apt-get install libreadline-dev 
+apt-get install libsqlite3-dev 
+apt-get install libtool 
+apt-get install automake 
+apt-get install autoconf (already have)
+apt-get install build-essential (already have)
+apt-get install subversion 
+apt-get install git-core (already have)
+apt-get install flex 
+apt-get install bison 
+apt-get install pkg-config (already have)
+apt-get install libnl-3-dev 
+apt-get install libnl-genl-3-dev 
+apt-get install libnl-nf-3-dev 
+apt-get install libnl-route-3-dev (already have)
+apt-get install liblcfg (unverified)
+apt-get install libemu (s7t.de -- unverified)
+apt-get install libev (s7t.de)
+apt-get install dionaea-python 
+apt-get install dionaea-cython 
+apt-get install libpcap 
+apt-get install udns 
+apt-get install dionaea 
+apt-get install liblcfg
+
+Configuring dionaea
+
+cp /opt/dionaea/etc/dionaea/dionaea.conf.dist /opt/dionaea/etc/dionaea/dionaea.conf
+
+chown nobody:nogroup /opt/dionaea/var/dionaea -R
+Starting dionaea
+export PATH=$PATH:/opt/dionaea/bin
+dionaea -u nobody -g nogroup -r /opt/dionaea -w /opt/dionaea -p /opt/dionaea/var/dionaea.pid
+
+Passive identification with p0f
+apt-get install p0f 
+p0f -i any -u root -Q /tmp/p0f.sock -q -l -d -o /dev/null -c 1024
+chown nobody:nogroup /tmp/p0f.sock
+
+Reference: http://maniactwister.de/b/aazlvr/en
+                 http://dionaea.carnivore.it/
