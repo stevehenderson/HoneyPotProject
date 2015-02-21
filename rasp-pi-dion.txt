@@ -1,4 +1,8 @@
+#This script will install dioneaea on a raspberyy pi
 #http://droidtoo.blogspot.com/2013/05/setting-up-dionaea-on-raspberry-pi.html
+#Reference: 
+#  http://maniactwister.de/b/aazlvr/en
+#  http://dionaea.carnivore.it/
 
 echo "deb http://packages.s7t.de/raspbian wheezy main" >> /etc/apt/sources.list
 apt-get update
@@ -30,19 +34,16 @@ apt-get install udns
 apt-get install dionaea 
 apt-get install liblcfg
 
-Configuring dionaea
+#Configuring dionaea
 
 cp /opt/dionaea/etc/dionaea/dionaea.conf.dist /opt/dionaea/etc/dionaea/dionaea.conf
 
 chown nobody:nogroup /opt/dionaea/var/dionaea -R
-Starting dionaea
+#Starting dionaea
 export PATH=$PATH:/opt/dionaea/bin
 dionaea -u nobody -g nogroup -r /opt/dionaea -w /opt/dionaea -p /opt/dionaea/var/dionaea.pid
 
-Passive identification with p0f
+#Passive identification with p0f
 apt-get install p0f 
 p0f -i any -u root -Q /tmp/p0f.sock -q -l -d -o /dev/null -c 1024
 chown nobody:nogroup /tmp/p0f.sock
-
-Reference: http://maniactwister.de/b/aazlvr/en
-                 http://dionaea.carnivore.it/
